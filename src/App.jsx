@@ -5,9 +5,9 @@ import ImageGallery from './components/ImageGallery';
 import { fetchImages } from './api/unsplash';
 import Loader from './components/Loader';
 import ErrorMessage from './components/ErrorMessage';
-import ReactModal from 'react-modal';
+import { Modal } from '@arco-design/web-react';
 
-ReactModal.setAppElement('#root');
+
 
 function App() {
   const [images, setImages] = useState([]);
@@ -87,18 +87,24 @@ function App() {
         </button>
       )}
       {isModalOpen && (
-        <ReactModal
-          isOpen={isModalOpen}
-          onRequestClose={closeModal}
+        <Modal
+          visible={isModalOpen}
+          onCancel={closeModal}
+          footer={null}
+          centered="true"
           className="modal-content"
-          overlayClassName="modal-overlay"
+          maskClosable={true}
+          wrapClassName="modal-overlay"
+          closable={false}
         >
           <button className="modal-close-button" onClick={closeModal}>
             &times;
           </button>
+      {images[currentIndex] && (   
+        <>
           <img
             src={images[currentIndex].urls.regular}
-            alt={images[currentIndex].alt_description}
+            alt={images[currentIndex].alt_description || 'Image'}
             className="modal-image"
           />
           <div className="modal-info">
@@ -106,13 +112,17 @@ function App() {
             <p>By: {images[currentIndex].user.name || 'Unknown author'}</p>
             <p>Likes: {images[currentIndex].likes || '0'}</p>
           </div>
-          <button className="modal-prev-button" onClick={handlePrevImage}>
-            &lsaquo;
-          </button>
-          <button className="modal-next-button" onClick={handleNextImage}>
-            &rsaquo;
-          </button>
-        </ReactModal>
+          <div className="modal-navigation">
+            <button className="modal-prev-button" onClick={handlePrevImage}>
+              &lsaquo; Prev
+            </button>
+            <button className="modal-next-button" onClick={handleNextImage}>
+              Next &rsaquo;
+                </button>
+              </div>
+            </>
+          )}
+        </Modal>
       )}
     </div>
   );

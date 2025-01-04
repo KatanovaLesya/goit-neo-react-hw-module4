@@ -40,6 +40,7 @@ body {
   font-size: 24px;
   cursor: pointer;
   color: black;
+  z-index: 10;
 }
 
 .modal-close-button:hover {
@@ -68,6 +69,12 @@ body {
 
 .modal-info p {
   margin: 0 10px;
+}
+
+.modal-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
 .modal-prev-button,
