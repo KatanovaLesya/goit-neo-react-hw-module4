@@ -2,15 +2,16 @@ import PropTypes from 'prop-types';
 
 function ImageCard({ image, onClick }) {
   return (
-    <div onClick={() => onClick(image)} style={{ cursor: 'pointer' }}>
+    <div onClick={() => onClick(image)} className="image-card">
       <img
         src={image.urls.small}
         alt={image.alt_description}
-        style={{ width: '100%', borderRadius: '8px', marginBottom: '10px' }}
+        className="image-card-img"
       />
     </div>
   );
 }
+
 ImageCard.propTypes = {
   image: PropTypes.shape({
     urls: PropTypes.shape({

@@ -1,7 +1,6 @@
 import ImageCard from './ImageCard';
 import PropTypes from 'prop-types';
 
-
 function ImageGallery({ images, onSelectImage }) {
   return (
     <ul
@@ -13,14 +12,15 @@ function ImageGallery({ images, onSelectImage }) {
         padding: 0,
       }}
     >
-      {images.map((image) => (
+      {images.map((image, index) => (
         <li key={image.id}>
-          <ImageCard image={image} onClick={onSelectImage} />
+          <ImageCard image={image} onClick={() => onSelectImage(image, index)} />
         </li>
       ))}
     </ul>
   );
 }
+
 ImageGallery.propTypes = {
   images: PropTypes.arrayOf(
     PropTypes.shape({
